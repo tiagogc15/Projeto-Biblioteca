@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="d-flex">
+
+    <!-- MENU LATERAL -->
+    <div class="bg-dark text-white p-3" style="width:250px; height:100vh;">
+        <h4>📚 Biblioteca</h4>
+        <hr>
+
+        <a href="/" class="text-white d-block mb-2">🏠 Dashboard</a>
+        <a href="/livros/" class="text-white d-block mb-2">📖 Livros</a>
+        <a href="/emprestar/" class="text-white d-block mb-2">📤 Empréstimo</a>
+        <a href="/admin/" class="text-white d-block mb-2">⚙️ Admin</a>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="p-4" style="width:100%;">
+        {% block content %}{% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>

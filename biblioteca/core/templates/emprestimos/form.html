@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>Emprestar Livro</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Emprestar</button>
+</form>
+
+{% endblock %}
