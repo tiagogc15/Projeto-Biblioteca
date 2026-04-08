@@ -7,7 +7,19 @@ from .forms import LivroForm, EmprestimoForm
 from .forms import RegistroForm
 from .models import Livro
 from .forms import LivroForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, redirect
+from django.utils import timezone
+from .models import Emprestimo
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
+
+
+def is_admin(user):
+    return user.is_staff
 @login_required
 def home(request):
     return render(request, 'home.html')
@@ -19,6 +31,7 @@ def listar_livros(request):
     return render(request, 'livros/listar.html', {'livros': livros})
 
 
+@user_passes_test(is_admin)
 @login_required
 def criar_livro(request):
     form = LivroForm(request.POST or None)
@@ -30,30 +43,57 @@ def criar_livro(request):
 
 @login_required
 def emprestar_livro(request):
-    form = EmprestimoForm(request.POST or None)
-    if form.is_valid():
-        emprestimo = form.save(commit=False)
-        emprestimo.usuario = request.user
+    livro_id = request.GET.get('livro')
+    livro = Livro.objects.get(id=livro_id)
 
-        if emprestimo.livro.quantidade > 0:
-            emprestimo.livro.quantidade -= 1
-            emprestimo.livro.save()
-            emprestimo.save()
-            return redirect('listar_livros')
+    ja_tem = Emprestimo.objects.filter(
+        usuario=request.user,
+        livro=livro,
+        data_devolucao__isnull=True
+    ).exists()
 
-    return render(request, 'emprestimos/form.html', {'form': form})
+    if ja_tem:
+        messages.warning(request, "Você já pegou esse livro!")
+        return redirect('/livros/')
+
+    if livro.quantidade > 0:
+        livro.quantidade -= 1
+        livro.save()
+
+        Emprestimo.objects.create(
+            usuario=request.user,
+            livro=livro
+        )
+
+        # 🔥 AQUI
+        messages.success(request, "Livro reservado com sucesso!")
+
+    else:
+        messages.error(request, "Livro indisponível!")
+
+    return redirect('/livros/')
 
 
 @login_required
 def devolver_livro(request, id):
-    emp = get_object_or_404(Emprestimo, id=id)
-    emp.devolvido = True
-    emp.livro.quantidade += 1
-    emp.livro.save()
-    emp.save()
-    return redirect('listar_livros')
+    emprestimo = Emprestimo.objects.filter(
+        usuario=request.user,
+        livro_id=id,
+        data_devolucao__isnull=True
+    ).first()
+
+    if emprestimo:
+        emprestimo.data_devolucao = timezone.now()
+        emprestimo.save()
+
+        livro = emprestimo.livro
+        livro.quantidade += 1
+        livro.save()
+
+    return redirect('/livros/')
 
 # Create your views here.@login_required
+@user_passes_test(is_admin)
 @login_required
 def editar_livro(request, id):
     livro = get_object_or_404(Livro, id=id)
@@ -64,6 +104,7 @@ def editar_livro(request, id):
     return render(request, 'livros/form.html', {'form': form})
 
 
+@user_passes_test(is_admin)
 @login_required
 def excluir_livro(request, id):
     livro = get_object_or_404(Livro, id=id)
@@ -83,6 +124,48 @@ def registrar(request):
 def sair(request):
     logout(request)
     return redirect('/login/')
+
+def registro(request):
+    form = RegistroForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        login(request, user)
+        return redirect('/')
+    return render(request, 'registro.html', {'form': form})
+
+@login_required
+def meus_emprestimos(request):
+    emprestimos = Emprestimo.objects.filter(usuario=request.user)
+    return render(request, 'meus_emprestimos.html', {'emprestimos': emprestimos})
+
+@login_required
+def emprestar_livro(request):
+    livro_id = request.GET.get('livro')
+    livro = Livro.objects.get(id=livro_id)
+
+    ja_tem = Emprestimo.objects.filter(
+        usuario=request.user,
+        livro=livro,
+        data_devolucao__isnull=True
+    ).exists()
+
+    if ja_tem:
+        return redirect('/livros/')  
+
+    if livro.quantidade > 0:
+        livro.quantidade -= 1
+        livro.save()
+
+        Emprestimo.objects.create(
+            usuario=request.user,
+            livro=livro
+        )
+
+    return redirect('/livros/')
+
+
 
 
 

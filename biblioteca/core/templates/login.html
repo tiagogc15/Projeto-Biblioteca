@@ -15,14 +15,18 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="text" name="username" class="form-control mb-2" placeholder="Usuário" required>
-        <input type="password" name="password" class="form-control mb-3" placeholder="Senha" required>
+        <label>Usuário:</label>
+        <input type="text" name="username">
 
-        <button class="btn btn-primary w-100" type="submit">Entrar</button>
+        <label>Senha:</label>
+        <input type="password" name="password">
+
+        <button type="submit">Entrar</button>
+
+        
         <a href="/registro/" class="btn btn-link w-100 mt-2">Criar conta</a>
     
-    </form>
+    </form> 
 </div>
 
 </body>

@@ -1,0 +1,23 @@
+<h2>Meus Empréstimos</h2>
+
+<table class="table">
+<tr>
+    <th>Livro</th>
+    <th>Data Empréstimo</th>
+    <th>Data Devolução</th>
+</tr>
+
+{% for emp in emprestimos %}
+<tr>
+    <td>{{ emp.livro.titulo }}</td>
+    <td>{{ emp.data_emprestimo|date:"d/m/Y" }}</td>
+    <td>
+        {% if emp.data_devolucao %}
+            {{ emp.data_devolucao|date:"d/m/Y" }}
+        {% else %}
+            Em aberto
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</table>

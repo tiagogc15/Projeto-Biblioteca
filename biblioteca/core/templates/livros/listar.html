@@ -18,10 +18,29 @@
 <td>{{ livro.titulo }}</td>
 <td>{{ livro.autor }}</td>
 <td>{{ livro.quantidade }}</td>
+
+ <td>
+        {% for emp in livro.emprestimo_set.all %}
+            {% if emp.usuario == user and not emp.data_devolucao %}
+                Emprestado em: {{ emp.data_emprestimo|date:"d/m/Y" }} <br>
+                Devolvido em: {{ emp.data_devolucao|date:"d/m/Y" }}
+            {% endif %}
+        {% endfor %}
+    </td>
 <td>
-    <a href="/livros/editar/{{ livro.id }}/" class="btn btn-warning btn-sm">Editar</a>
-    <a href="/livros/excluir/{{ livro.id }}/" class="btn btn-danger btn-sm">Excluir</a>
-</td>
+        {% if user.is_staff %}
+            <a href="/livros/editar/{{ livro.id }}">Editar</a>
+            <a href="/livros/excluir/{{ livro.id }}">Excluir</a>
+        {% else %}
+            <a href="/emprestar/?livro={{ livro.id }}">Reservar</a>
+
+            {% for emp in livro.emprestimo_set.all %}
+                {% if emp.usuario == user and not emp.data_devolucao %}
+                    <a href="/devolver/{{ livro.id }}">Devolver</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </td>
 </tr>
 {% endfor %}
 </table>
