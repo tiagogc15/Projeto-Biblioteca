@@ -15,6 +15,7 @@ from django.utils import timezone
 from .models import Emprestimo
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Sum
 
 
 
@@ -22,7 +23,19 @@ def is_admin(user):
     return user.is_staff
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    total_livros = Livro.objects.count()
+
+    # 🔥 SOMA DAS QUANTIDADES
+    disponiveis = Livro.objects.aggregate(total=Sum('quantidade'))['total'] or 0
+
+    # 🔥 TOTAL EMPRESTADO
+    emprestados = Emprestimo.objects.filter(data_devolucao__isnull=True).count()
+
+    return render(request, 'home.html', {
+        'total_livros': total_livros,
+        'disponiveis': disponiveis,
+        'emprestados': emprestados
+    })
 
 
 @login_required
@@ -44,6 +57,11 @@ def criar_livro(request):
 @login_required
 def emprestar_livro(request):
     livro_id = request.GET.get('livro')
+
+    if not livro_id:
+        messages.error(request, "Selecione um livro válido")
+        return redirect('/livros/')
+
     livro = Livro.objects.get(id=livro_id)
 
     ja_tem = Emprestimo.objects.filter(
@@ -65,9 +83,7 @@ def emprestar_livro(request):
             livro=livro
         )
 
-        # 🔥 AQUI
         messages.success(request, "Livro reservado com sucesso!")
-
     else:
         messages.error(request, "Livro indisponível!")
 
@@ -76,21 +92,21 @@ def emprestar_livro(request):
 
 @login_required
 def devolver_livro(request, id):
-    emprestimo = Emprestimo.objects.filter(
-        usuario=request.user,
-        livro_id=id,
-        data_devolucao__isnull=True
-    ).first()
+    emprestimo = get_object_or_404(Emprestimo, id=id)
 
-    if emprestimo:
-        emprestimo.data_devolucao = timezone.now()
-        emprestimo.save()
+    # 🔥 segurança: só dono ou admin
+    if emprestimo.usuario != request.user and not request.user.is_staff:
+        return redirect('/')
 
-        livro = emprestimo.livro
-        livro.quantidade += 1
-        livro.save()
+    emprestimo.devolvido = True
+    emprestimo.data_devolucao = timezone.now()
+    emprestimo.save()
 
-    return redirect('/livros/')
+    livro = emprestimo.livro
+    livro.quantidade += 1
+    livro.save()
+
+    return redirect('/meus/')
 
 # Create your views here.@login_required
 @user_passes_test(is_admin)
@@ -138,7 +154,10 @@ def registro(request):
 @login_required
 def meus_emprestimos(request):
     emprestimos = Emprestimo.objects.filter(usuario=request.user)
-    return render(request, 'meus_emprestimos.html', {'emprestimos': emprestimos})
+
+    return render(request, 'meus_emprestimos.html', {
+        'emprestimos': emprestimos
+    })
 
 @login_required
 def emprestar_livro(request):
@@ -164,6 +183,8 @@ def emprestar_livro(request):
         )
 
     return redirect('/livros/')
+
+
 
 
 

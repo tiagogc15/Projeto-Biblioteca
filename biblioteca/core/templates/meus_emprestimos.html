@@ -1,23 +1,44 @@
+{% extends 'index.html' %}
+
+{% block content %}
 <h2>Meus Empréstimos</h2>
 
+{% if emprestimos %}
 <table class="table">
 <tr>
     <th>Livro</th>
     <th>Data Empréstimo</th>
     <th>Data Devolução</th>
+    <th>Status</th>
 </tr>
 
 {% for emp in emprestimos %}
 <tr>
     <td>{{ emp.livro.titulo }}</td>
+
     <td>{{ emp.data_emprestimo|date:"d/m/Y" }}</td>
+
     <td>
         {% if emp.data_devolucao %}
             {{ emp.data_devolucao|date:"d/m/Y" }}
         {% else %}
-            Em aberto
+            ---
         {% endif %}
     </td>
+
+    <td>
+        {% if emp.devolvido %}
+            <span class="badge bg-success">Devolvido</span>
+        {% else %}
+            <span class="badge bg-warning">Em aberto</span>
+            <a href="/devolver/{{ emp.id }}" class="btn btn-danger btn-sm">
+                Devolver
+            </a>
+        {% endif %}
+    </td>
+
 </tr>
 {% endfor %}
 </table>
+{% endif %}
+{% endblock %}

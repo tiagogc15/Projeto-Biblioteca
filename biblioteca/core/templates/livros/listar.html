@@ -32,13 +32,11 @@
             <a href="/livros/editar/{{ livro.id }}">Editar</a>
             <a href="/livros/excluir/{{ livro.id }}">Excluir</a>
         {% else %}
-            <a href="/emprestar/?livro={{ livro.id }}">Reservar</a>
-
-            {% for emp in livro.emprestimo_set.all %}
-                {% if emp.usuario == user and not emp.data_devolucao %}
-                    <a href="/devolver/{{ livro.id }}">Devolver</a>
-                {% endif %}
-            {% endfor %}
+            {% if livro.quantidade > 0 %}
+                <a href="/emprestar/?livro={{ livro.id }}" class="btn btn-success">Reservar</a>
+            {% else %}
+                <span class="badge bg-danger">Indisponível</span>
+            {% endif %}
         {% endif %}
     </td>
 </tr>

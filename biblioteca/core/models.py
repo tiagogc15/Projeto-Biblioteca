@@ -16,3 +16,4 @@ class Emprestimo(models.Model):
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
     data_emprestimo = models.DateField(auto_now_add=True)
     data_devolucao = models.DateField(null=True, blank=True)
+    devolvido = models.BooleanField(default=False)
