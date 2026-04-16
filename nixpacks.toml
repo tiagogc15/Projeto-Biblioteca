@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["python311", "pip"]
+
+[phases.install]
+cmds = ["pip install -r biblioteca/requirements.txt"]
+
+[phases.start]
+cmd = "cd biblioteca && python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT"
