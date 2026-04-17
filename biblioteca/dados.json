@@ -1,1 +1,250 @@
-[{"model": "core.livro", "pk": 3, "fields": {"titulo": "Programação Lógica", "autor": "Programador", "isbn": "00000", "quantidade": 2}}, {"model": "core.livro", "pk": 4, "fields": {"titulo": "DevPython", "autor": "Python", "isbn": "00001", "quantidade": 2}}, {"model": "core.livro", "pk": 5, "fields": {"titulo": "JavaScript", "autor": "Brendan Eich", "isbn": "00002", "quantidade": 2}}, {"model": "core.livro", "pk": 6, "fields": {"titulo": "C++", "autor": "Becker", "isbn": "00003", "quantidade": 2}}, {"model": "core.livro", "pk": 7, "fields": {"titulo": "Introdução à Linguagem SQL", "autor": "Thomas Nield", "isbn": "00004", "quantidade": 10}}, {"model": "core.emprestimo", "pk": 1, "fields": {"usuario": 1, "livro": 3, "data_emprestimo": "2026-07-04", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 26, "fields": {"usuario": 8, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 27, "fields": {"usuario": 8, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 28, "fields": {"usuario": 8, "livro": 4, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 29, "fields": {"usuario": 8, "livro": 5, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 30, "fields": {"usuario": 8, "livro": 6, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 31, "fields": {"usuario": 8, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 32, "fields": {"usuario": 8, "livro": 4, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 33, "fields": {"usuario": 8, "livro": 5, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 34, "fields": {"usuario": 8, "livro": 6, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 35, "fields": {"usuario": 9, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 36, "fields": {"usuario": 9, "livro": 4, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 37, "fields": {"usuario": 9, "livro": 5, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 38, "fields": {"usuario": 9, "livro": 6, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 39, "fields": {"usuario": 8, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 40, "fields": {"usuario": 8, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 41, "fields": {"usuario": 10, "livro": 3, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}, {"model": "core.emprestimo", "pk": 42, "fields": {"usuario": 11, "livro": 5, "data_emprestimo": "2026-04-09", "data_devolucao": "2026-04-09", "devolvido": true}}]
+[
+{
+  "model": "core.livro",
+  "pk": 3,
+  "fields": {
+    "titulo": "Programação Lógica",
+    "autor": "Programador",
+    "isbn": "00000",
+    "quantidade": 2
+  }
+},
+{
+  "model": "core.livro",
+  "pk": 4,
+  "fields": {
+    "titulo": "DevPython",
+    "autor": "Python",
+    "isbn": "00001",
+    "quantidade": 2
+  }
+},
+{
+  "model": "core.livro",
+  "pk": 5,
+  "fields": {
+    "titulo": "JavaScript",
+    "autor": "Brendan Eich",
+    "isbn": "00002",
+    "quantidade": 2
+  }
+},
+{
+  "model": "core.livro",
+  "pk": 6,
+  "fields": {
+    "titulo": "C++",
+    "autor": "Becker",
+    "isbn": "00003",
+    "quantidade": 2
+  }
+},
+{
+  "model": "core.livro",
+  "pk": 7,
+  "fields": {
+    "titulo": "Introdução à Linguagem SQL",
+    "autor": "Thomas Nield",
+    "isbn": "00004",
+    "quantidade": 10
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 1,
+  "fields": {
+    "usuario": 1,
+    "livro": 3,
+    "data_emprestimo": "2026-07-04",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 26,
+  "fields": {
+    "usuario": 8,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 27,
+  "fields": {
+    "usuario": 8,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 28,
+  "fields": {
+    "usuario": 8,
+    "livro": 4,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 29,
+  "fields": {
+    "usuario": 8,
+    "livro": 5,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 30,
+  "fields": {
+    "usuario": 8,
+    "livro": 6,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 31,
+  "fields": {
+    "usuario": 8,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 32,
+  "fields": {
+    "usuario": 8,
+    "livro": 4,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 33,
+  "fields": {
+    "usuario": 8,
+    "livro": 5,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 34,
+  "fields": {
+    "usuario": 8,
+    "livro": 6,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 35,
+  "fields": {
+    "usuario": 9,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 36,
+  "fields": {
+    "usuario": 9,
+    "livro": 4,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 37,
+  "fields": {
+    "usuario": 9,
+    "livro": 5,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 38,
+  "fields": {
+    "usuario": 9,
+    "livro": 6,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 39,
+  "fields": {
+    "usuario": 8,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 40,
+  "fields": {
+    "usuario": 8,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 41,
+  "fields": {
+    "usuario": 10,
+    "livro": 3,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+},
+{
+  "model": "core.emprestimo",
+  "pk": 42,
+  "fields": {
+    "usuario": 11,
+    "livro": 5,
+    "data_emprestimo": "2026-04-09",
+    "data_devolucao": "2026-04-09",
+    "devolvido": true
+  }
+}
+]
