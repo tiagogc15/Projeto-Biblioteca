@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import home
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('', home),
 
     path('livros/', views.listar_livros, name='listar_livros'),
     path('livros/novo/', views.criar_livro, name='criar_livro'),
