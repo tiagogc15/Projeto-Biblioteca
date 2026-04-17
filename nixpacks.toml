@@ -1,10 +1,11 @@
-providers = ["python"]
-
 [phases.setup]
 nixPkgs = ["python311"]
 
 [phases.install]
-cmds = ["pip install -r biblioteca/requirements.txt"]
+cmds = [
+  "python -m pip install --upgrade pip",
+  "pip install -r biblioteca/requirements.txt"
+]
 
 [start]
-cmd = "cd biblioteca && python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:$PORT"
+cmd = "cd biblioteca && python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT"
