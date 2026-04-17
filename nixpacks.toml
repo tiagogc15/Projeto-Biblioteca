@@ -3,9 +3,10 @@ nixPkgs = ["python311Full"]
 
 [phases.install]
 cmds = [
-  "python -m pip install --upgrade pip",
-  "pip install -r biblioteca/requirements.txt"
+  "python -m venv .venv",
+  ". .venv/bin/activate && pip install --upgrade pip",
+  ". .venv/bin/activate && pip install -r biblioteca/requirements.txt"
 ]
 
 [start]
-cmd = "cd biblioteca && python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT"
+cmd = "cd biblioteca && ../.venv/bin/python manage.py migrate && ../.venv/bin/python manage.py runserver 0.0.0.0:$PORT"
