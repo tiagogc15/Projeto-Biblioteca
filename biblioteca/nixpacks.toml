@@ -1,2 +1,2 @@
 [start]
-cmd = "cd biblioteca && ../.venv/bin/python manage.py migrate && ../.venv/bin/gunicorn biblioteca.wsgi:application --bind 0.0.0.0:$PORT"
+cmd = "cd biblioteca && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn biblioteca.wsgi:application --bind 0.0.0.0:$PORT"
