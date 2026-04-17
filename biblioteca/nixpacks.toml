@@ -1,2 +1,10 @@
+[phases.setup]
+nixPkgs = ["python311Full"]
+
+[phases.install]
+cmds = [
+  "pip install -r biblioteca/requirements.txt"
+]
+
 [start]
-cmd = "cd biblioteca && ../.venv/bin/python manage.py migrate && ../.venv/bin/python manage.py loaddata dados.json && ../.venv/bin/gunicorn biblioteca.wsgi:application --bind 0.0.0.0:$PORT"
+cmd = "cd biblioteca && python manage.py migrate && python manage.py loaddata dados.json && gunicorn biblioteca.wsgi:application --bind 0.0.0.0:$PORT"
