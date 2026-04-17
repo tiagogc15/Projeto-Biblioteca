@@ -24,12 +24,8 @@ def is_admin(user):
 @login_required
 def home(request):
     total_livros = Livro.objects.count()
-
-    # 🔥 SOMA DAS QUANTIDADES
-    disponiveis = Livro.objects.aggregate(total=Sum('quantidade'))['total'] or 0
-
-    # 🔥 TOTAL EMPRESTADO
-    emprestados = Emprestimo.objects.filter(data_devolucao__isnull=True).count()
+    disponiveis = Livro.objects.count()  # 🔥 simplificado
+    emprestados = Emprestimo.objects.count()
 
     return render(request, 'home.html', {
         'total_livros': total_livros,
