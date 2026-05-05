@@ -35,7 +35,7 @@
             position: fixed;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             z-index: -1;
         }
 
@@ -43,7 +43,7 @@
         .sidebar {
             width: 250px;
             height: 100vh;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             backdrop-filter: blur(10px);
             padding: 20px;
         }
@@ -74,9 +74,9 @@
             padding: 30px;
             border-radius: 20px;
 
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(15px);
-            color: white;
+            color: #fff;
 
             animation: fadeIn 0.6s ease-in-out;
         }
@@ -95,7 +95,7 @@
 
         /* 🔥 CARDS */
         .card {
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.4);
             backdrop-filter: blur(10px);
             border: none;
             border-radius: 15px;
@@ -118,30 +118,44 @@
             border: none;
         }
 
-        /* 🔥 TABELAS */
+        /* 🔥 TABELA */
         table {
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.5);
             color: white;
             border-radius: 10px;
             overflow: hidden;
         }
 
-        th, td {
-            color: white !important;
+        th {
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        td {
+            color: #f1f1f1 !important;
         }
 
         /* 🌙 LIGHT MODE */
         .light-mode .content {
-            background: rgba(255,255,255,0.9);
-            color: black;
+            background: rgba(255,255,255,0.95);
+            color: #222;
         }
 
         .light-mode .sidebar {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255,255,255,0.95);
         }
 
         .light-mode a {
-            color: black !important;
+            color: #222 !important;
+        }
+
+        .light-mode table {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .light-mode td,
+        .light-mode th {
+            color: #222 !important;
         }
 
         /* 📱 RESPONSIVO */
