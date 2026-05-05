@@ -2,29 +2,26 @@
 
 {% block content %}
 
-<div class="row g-4">
+<div class="row">
 
-    <!-- CARD 1 -->
     <div class="col-md-4">
-        <div class="card shadow-lg rounded-4 text-center p-3">
-            <h5 class="titulo-card">Total de Livros</h5>
-            <h3 class="valor-card text-primary">{{ total_livros }}</h3>
+        <div class="card-dashboard">
+            <h5>Total de Livros</h5>
+            <div class="numero azul">{{ total_livros }}</div>
         </div>
     </div>
 
-    <!-- CARD 2 -->
     <div class="col-md-4">
-        <div class="card shadow-lg rounded-4 text-center p-3">
-            <h5 class="titulo-card">Disponíveis</h5>
-            <h3 class="valor-card text-success">{{ disponiveis }}</h3>
+        <div class="card-dashboard">
+            <h5>Disponíveis</h5>
+            <div class="numero verde">{{ disponiveis }}</div>
         </div>
     </div>
 
-    <!-- CARD 3 -->
     <div class="col-md-4">
-        <div class="card shadow-lg rounded-4 text-center p-3">
-            <h5 class="titulo-card">Emprestados</h5>
-            <h3 class="valor-card text-danger">{{ emprestados }}</h3>
+        <div class="card-dashboard">
+            <h5>Emprestados</h5>
+            <div class="numero vermelho">{{ emprestados }}</div>
         </div>
     </div>
 
