@@ -3,83 +3,150 @@
 <html>
 <head>
     <title>Biblioteca</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* 🔥 FUNDO */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("{% static 'img/fundo.png' %}") no-repeat center center;
+            background-size: cover;
+            filter: brightness(0.6); /* escurece levemente */
+            z-index: -2;
+        }
+
+        /* 🔥 OVERLAY SUAVE */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        /* 🔥 MENU LATERAL */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ddd;
+            padding: 10px;
+            display: block;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        /* 🔥 CONTEÚDO PRINCIPAL */
+        .content {
+            width: 100%;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+
+            color: white;
+        }
+
+        /* 🔥 CARDS */
         .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 15px;
+            color: white;
             transition: 0.3s;
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
         }
 
+        /* 🔥 BOTÕES */
         .btn {
             border-radius: 10px;
         }
 
+        /* 🔥 ALERTAS */
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        /* 🔥 TABELA */
         table {
             border-radius: 10px;
             overflow: hidden;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        th, td {
+            color: white !important;
         }
     </style>
 </head>
+
 <body>
 
-
-<!-- 🔥 FUNDO PROFISSIONAL -->
-<style>
-body {
-    margin: 0;
-    padding: 0;
-}
-
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("{% static 'img/fundo.png' %}");
-    background-size: cover;
-    background-position: center;
-    filter: blur(2px) brightness(0.7);
-    z-index: -1;
-}
-</style>
-    
 <div class="d-flex">
 
-    <!-- MENU LATERAL -->
-    <div class="bg-dark text-white p-3" style="width:250px; height:100vh;"> 
-        <h4 class="mb-3">📚 Biblioteca</h4>
+    <!-- MENU -->
+    <div class="sidebar text-white p-3">
+        <h4 class="mb-4">📚 Biblioteca</h4>
 
-        <a href="/" class="text-white d-block mb-2">🏠 Dashboard</a>
-        <a href="/livros/" class="text-white d-block mb-2">📖 Livros</a>
-        <a href="/meus/" class="text-white d-block mb-2">📚 Meus Empréstimos</a>
+        <a href="/">🏠 Dashboard</a>
+        <a href="/livros/">📖 Livros</a>
+        <a href="/meus/">📚 Meus Empréstimos</a>
 
         {% if user.is_staff %}
-        <a href="/admin/" class="text-white d-block mt-2">⚙️ Admin</a>
+        <a href="/admin/">⚙️ Admin</a>
         {% endif %}
 
-    <hr>
+        <hr>
 
-        <a href="/sair/" class="btn btn-danger w-100">Sair</a>
+        <a href="/sair/" class="btn btn-danger w-100 mt-2">Sair</a>
     </div>
 
     <!-- CONTEÚDO -->
-    <div class="p-4" style="width:100%; background: rgba(255,255,255,0.6); border-radius:15px; backdrop-filter: blur(5px); margin:10px;">
-         
-        <!-- 🔥 MENSAGENS --> 
-         {% if messages %} 
-            {% for message in messages %} 
+    <div class="content">
+
+        <!-- 🔥 MENSAGENS -->
+        {% if messages %}
+            {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
-                     {{ message }} 
-                </div> 
-            {% endfor %} 
-        {% endif %} 
-        
-        {% block content %}{% endblock %} 
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
     </div>
 
 </div>
