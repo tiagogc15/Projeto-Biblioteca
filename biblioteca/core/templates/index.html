@@ -14,136 +14,170 @@
     <style>
         body {
             margin: 0;
-            padding: 0;
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* ===== FUNDO ===== */
+        /* 🔥 FUNDO */
         body::before {
             content: "";
             position: fixed;
-            inset: 0;
-            background-image: url("{% static 'img/fundo.png' %}");
+            width: 100%;
+            height: 100%;
+            background: url("{% static 'img/fundo.png' %}") no-repeat center;
             background-size: cover;
-            background-position: center;
-            filter: blur(4px) brightness(0.6);
+            filter: brightness(0.6);
+            z-index: -2;
+        }
+
+        /* 🔥 OVERLAY */
+        body::after {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
             z-index: -1;
         }
 
-        /* ===== SIDEBAR ===== */
+        /* 🔥 SIDEBAR */
         .sidebar {
             width: 250px;
             height: 100vh;
-            background: linear-gradient(180deg, #0d1b2a, #000);
-            color: white;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
             padding: 20px;
         }
 
+        .sidebar h4 {
+            color: white;
+        }
+
         .sidebar a {
+            color: #ddd;
             display: block;
-            color: #ccc;
             padding: 10px;
             border-radius: 8px;
             text-decoration: none;
-            margin-bottom: 8px;
             transition: 0.3s;
         }
 
         .sidebar a:hover {
             background: rgba(255,255,255,0.1);
-            color: #fff;
+            color: white;
+            transform: translateX(5px);
         }
 
-        /* ===== CONTEÚDO ===== */
-        .content-area {
+        /* 🔥 CONTEÚDO */
+        .content {
             width: 100%;
-            margin: 10px;
-            padding: 25px;
+            margin: 20px;
+            padding: 30px;
             border-radius: 20px;
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.85);
-            transition: 0.3s;
+
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(15px);
+            color: #fff;
+
+            animation: fadeIn 0.6s ease-in-out;
         }
 
-        /* ===== CARDS ===== */
+        /* 🔥 ANIMAÇÃO */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 🔥 CARDS */
         .card {
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
             border: none;
             border-radius: 15px;
+            color: white;
             transition: 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-5px);
         }
 
-        /* ===== TABELA ===== */
-        table {
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        thead {
-            background: #0d1b2a;
-            color: white;
-        }
-
-        tbody tr {
-            transition: 0.2s;
-        }
-
-        tbody tr:hover {
-            background: rgba(0,0,0,0.05);
-        }
-
-        /* ===== BOTÕES ===== */
+        /* 🔥 BOTÕES */
         .btn {
             border-radius: 10px;
         }
 
-        /* ===== DARK MODE ===== */
-        .dark-mode .content-area {
-            background: rgba(0,0,0,0.85);
-        }
-
-        .dark-mode {
-            color: white !important;
-        }
-
-        .dark-mode h1,
-        .dark-mode h2,
-        .dark-mode h3,
-        .dark-mode h4,
-        .dark-mode h5,
-        .dark-mode p,
-        .dark-mode span,
-        .dark-mode td,
-        .dark-mode th,
-        .dark-mode a {
-            color: #ffffff !important;
-        }
-
-        .dark-mode thead {
-            background: #111;
-        }
-
-        .dark-mode tbody tr {
-            background: rgba(255,255,255,0.05);
-        }
-
-        .dark-mode tbody tr:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* ===== BOTÃO DARK ===== */
-        .toggle-dark {
-            background: #eee;
-            border: none;
+        /* 🔥 ALERTAS */
+        .alert {
             border-radius: 10px;
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 10px;
+            border: none;
         }
 
+        /* 🔥 TABELA */
+        table {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        td {
+            color: #f1f1f1 !important;
+        }
+
+        /* 🌙 LIGHT MODE */
+        .light-mode .content {
+            background: rgba(255,255,255,0.95);
+            color: #222;
+        }
+
+        .light-mode .sidebar {
+            background: rgba(255,255,255,0.95);
+        }
+
+        .light-mode a {
+            color: #222 !important;
+        }
+
+        .light-mode table {
+            background: rgba(255,255,255,0.9);
+        }
+
+        .light-mode td,
+        .light-mode th {
+            color: #222 !important;
+        }
+
+        /* 📱 RESPONSIVO */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                padding: 10px;
+            }
+
+            .sidebar h4 {
+                display: none;
+            }
+
+            .sidebar a span {
+                display: none;
+            }
+
+            .content {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 
@@ -151,31 +185,45 @@
 
 <div class="d-flex">
 
-    <!-- SIDEBAR -->
+    <!-- MENU -->
     <div class="sidebar">
-        <h4 class="mb-4">📚 Biblioteca</h4>
 
-        <a href="/"><i class="bi bi-house"></i> Dashboard</a>
-        <a href="/livros/"><i class="bi bi-book"></i> Livros</a>
-        <a href="/meus/"><i class="bi bi-journal"></i> Empréstimos</a>
+        <h4>📚 Biblioteca</h4>
+
+        <a href="/">
+            <i class="bi bi-house-door"></i> <span>Dashboard</span>
+        </a>
+
+        <a href="/livros/">
+            <i class="bi bi-book"></i> <span>Livros</span>
+        </a>
+
+        <a href="/meus/">
+            <i class="bi bi-journal-check"></i> <span>Empréstimos</span>
+        </a>
 
         {% if user.is_staff %}
-        <a href="/admin/"><i class="bi bi-gear"></i> Admin</a>
+        <a href="/admin/">
+            <i class="bi bi-gear"></i> <span>Admin</span>
+        </a>
         {% endif %}
 
         <hr>
 
-        <button onclick="toggleDark()" class="toggle-dark">
-            🌙 Modo Escuro
+        <!-- 🌙 BOTÃO TEMA -->
+        <button onclick="toggleTheme()" class="btn btn-light w-100 mb-2">
+            <i class="bi bi-moon"></i>
         </button>
 
-        <a href="/sair/" class="btn btn-danger w-100">Sair</a>
+        <a href="/sair/" class="btn btn-danger w-100">
+            Sair
+        </a>
+
     </div>
 
     <!-- CONTEÚDO -->
-    <div class="content-area">
+    <div class="content">
 
-        <!-- MENSAGENS -->
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -185,16 +233,26 @@
         {% endif %}
 
         {% block content %}{% endblock %}
-
     </div>
 
 </div>
 
-<!-- SCRIPT DARK MODE -->
+<!-- 🌙 SCRIPT DARK MODE -->
 <script>
-function toggleDark() {
-    document.body.classList.toggle("dark-mode");
+function toggleTheme() {
+    document.body.classList.toggle("light-mode");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("light-mode") ? "light" : "dark"
+    );
 }
+
+window.onload = function () {
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light-mode");
+    }
+};
 </script>
 
 </body>
