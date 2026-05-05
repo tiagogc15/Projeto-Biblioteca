@@ -18,7 +18,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* ===== FUNDO ===== */
+        /* FUNDO */
         body::before {
             content: "";
             position: fixed;
@@ -30,7 +30,7 @@
             z-index: -1;
         }
 
-        /* ===== SIDEBAR ===== */
+        /* SIDEBAR */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -49,14 +49,13 @@
             transition: all 0.3s ease;
         }
 
-        /* ANIMAÇÃO */
         .sidebar a:hover {
             background: rgba(255,255,255,0.1);
             transform: translateX(5px);
             color: #fff;
         }
 
-        /* ===== BOTÕES ===== */
+        /* BOTÕES */
         .btn {
             border-radius: 10px;
             transition: 0.3s;
@@ -66,7 +65,7 @@
             transform: scale(1.05);
         }
 
-        /* ===== CONTEÚDO ===== */
+        /* CONTEÚDO */
         .content-area {
             width: 100%;
             margin: 10px;
@@ -76,7 +75,7 @@
             background: rgba(255,255,255,0.85);
         }
 
-        /* ===== TABELA ===== */
+        /* TABELA */
         table {
             border-radius: 15px;
             overflow: hidden;
@@ -88,44 +87,48 @@
             color: white;
         }
 
-        tbody tr {
-            transition: 0.2s;
-        }
-
         tbody tr:hover {
             background: rgba(0,0,0,0.05);
         }
 
-        /* ===== DARK MODE (AJUSTADO CORRETAMENTE) ===== */
+        /* ===== DASHBOARD ===== */
+        .titulo-card {
+            color: #333;
+        }
+
+        .valor-card {
+            font-weight: bold;
+        }
+
+        /* ===== DARK MODE ===== */
         .dark-mode {
             color: white;
         }
 
-        /* NÃO muda tabela */
+        .dark-mode .content-area {
+            background: rgba(0,0,0,0.6);
+        }
+
+        /* mantém tabela branca */
         .dark-mode table {
             background: white !important;
         }
 
-        /* texto dentro da tabela continua escuro */
+        /* texto da tabela */
         .dark-mode td,
         .dark-mode th {
             color: #000 !important;
         }
 
-        /* textos fora da tabela */
-        .dark-mode h1,
-        .dark-mode h2,
-        .dark-mode h3,
-        .dark-mode h4,
-        .dark-mode h5,
-        .dark-mode p,
-        .dark-mode span {
+        /* títulos do dashboard ficam brancos */
+        .dark-mode .titulo-card {
             color: #fff !important;
         }
 
-        /* fundo do conteúdo */
-        .dark-mode .content-area {
-            background: rgba(0,0,0,0.6);
+        /* cards estilo vidro */
+        .dark-mode .card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
         }
 
         /* botão dark */
@@ -179,7 +182,6 @@
     <!-- CONTEÚDO -->
     <div class="content-area">
 
-        <!-- MENSAGENS -->
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -194,7 +196,6 @@
 
 </div>
 
-<!-- SCRIPT DARK MODE -->
 <script>
 function toggleDark() {
     document.body.classList.toggle("dark-mode");

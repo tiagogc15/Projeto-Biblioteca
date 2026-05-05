@@ -2,34 +2,32 @@
 
 {% block content %}
 
-<!-- CARD 1 -->
-<div class="col-md-4">
-    <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body text-center">
-            <h5>Total de Livros</h5>
-            <h3 class="text-primary">{{ total_livros }}</h3>
-        </div>
-    </div>
-</div>
+<div class="row g-4">
 
-<!-- CARD 2 -->
-<div class="col-md-4">
-    <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body text-center">
-            <h5>Disponíveis</h5>
-            <h3 class="text-success">{{ disponiveis }}</h3>
+    <!-- CARD 1 -->
+    <div class="col-md-4">
+        <div class="card shadow-lg rounded-4 text-center p-3">
+            <h5 class="titulo-card">Total de Livros</h5>
+            <h3 class="valor-card text-primary">{{ total_livros }}</h3>
         </div>
     </div>
-</div>
 
-<!-- CARD 3 -->
-<div class="col-md-4">
-    <div class="card shadow-lg border-0 rounded-4">
-        <div class="card-body text-center">
-            <h5>Emprestados</h5>
-            <h3 class="text-danger">{{ emprestados }}</h3>
+    <!-- CARD 2 -->
+    <div class="col-md-4">
+        <div class="card shadow-lg rounded-4 text-center p-3">
+            <h5 class="titulo-card">Disponíveis</h5>
+            <h3 class="valor-card text-success">{{ disponiveis }}</h3>
         </div>
     </div>
+
+    <!-- CARD 3 -->
+    <div class="col-md-4">
+        <div class="card shadow-lg rounded-4 text-center p-3">
+            <h5 class="titulo-card">Emprestados</h5>
+            <h3 class="valor-card text-danger">{{ emprestados }}</h3>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}
