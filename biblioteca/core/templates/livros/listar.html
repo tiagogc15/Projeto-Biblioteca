@@ -1,46 +1,129 @@
 {% extends 'index.html' %}
 
 {% block content %}
+
+<style>
+
+.qtd-coluna {
+    width: 80px;
+    text-align: center;
+}
+
+.acoes-coluna {
+    width: 180px;
+    text-align: center;
+}
+
+.acoes-coluna .btn {
+    min-width: 100px;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+</style>
+
 <h2>Livros</h2>
 
-<a href="/livros/novo/" class="btn btn-primary mb-3">Novo Livro</a>
+<a href="/livros/novo/" class="btn btn-primary mb-3">
+    Novo Livro
+</a>
 
 <table class="table table-hover">
-<tr>
-<th>Título</th>
-<th>Autor</th>
-<th>Qtd</th>
-<th>Ações</th>
-</tr>
 
-{% for livro in livros %}
-<tr>
-<td>{{ livro.titulo }}</td>
-<td>{{ livro.autor }}</td>
-<td>{{ livro.quantidade }}</td>
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
 
- <td>
-        {% for emp in livro.emprestimo_set.all %}
-            {% if emp.usuario == user and not emp.data_devolucao %}
-                Emprestado em: {{ emp.data_emprestimo|date:"d/m/Y" }} <br>
-                Devolvido em: {{ emp.data_devolucao|date:"d/m/Y" }}
-            {% endif %}
-        {% endfor %}
-    </td>
-<td>
-        {% if user.is_staff %}
-            <a href="/livros/editar/{{ livro.id }}">Editar</a>
-            <a href="/livros/excluir/{{ livro.id }}">Excluir</a>
-        {% else %}
-            {% if livro.quantidade > 0 %}
-                <a href="/emprestar/?livro={{ livro.id }}" class="btn btn-success">Reservar</a>
+            <th class="qtd-coluna">
+                Qtd
+            </th>
+
+            <th>
+                Empréstimo
+            </th>
+
+            <th class="acoes-coluna">
+                Ações
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for livro in livros %}
+
+    <tr>
+
+        <td>{{ livro.titulo }}</td>
+
+        <td>{{ livro.autor }}</td>
+
+        <td class="qtd-coluna">
+            {{ livro.quantidade }}
+        </td>
+
+        <td>
+            {% for emp in livro.emprestimo_set.all %}
+                {% if emp.usuario == user and not emp.data_devolucao %}
+
+                    Emprestado em:
+                    {{ emp.data_emprestimo|date:"d/m/Y" }}
+
+                {% endif %}
+            {% endfor %}
+        </td>
+
+        <td class="acoes-coluna">
+
+            {% if user.is_staff %}
+
+                <a
+                    href="/livros/editar/{{ livro.id }}"
+                    class="btn btn-warning btn-sm"
+                >
+                    Editar
+                </a>
+
+                <a
+                    href="/livros/excluir/{{ livro.id }}"
+                    class="btn btn-danger btn-sm"
+                >
+                    Excluir
+                </a>
+
             {% else %}
-                <span class="badge bg-danger">Indisponível</span>
+
+                {% if livro.quantidade > 0 %}
+
+                    <a
+                        href="/emprestar/?livro={{ livro.id }}"
+                        class="btn btn-success"
+                    >
+                        Reservar
+                    </a>
+
+                {% else %}
+
+                    <span class="badge bg-danger">
+                        Indisponível
+                    </span>
+
+                {% endif %}
+
             {% endif %}
-        {% endif %}
-    </td>
-</tr>
-{% endfor %}
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
 </table>
 
 {% endblock %}
