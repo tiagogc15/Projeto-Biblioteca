@@ -52,7 +52,7 @@ def home(request):
 
 @login_required
 def listar_livros(request):
-    livros = Livro.objects.all()
+    livros = Livro.objects.all().order_by('id')
     return render(request, 'livros/listar.html', {'livros': livros})
 
 
